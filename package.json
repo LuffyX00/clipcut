@@ -1,0 +1,53 @@
+{
+  "name": "clipcut",
+  "productName": "ClipCut",
+  "version": "1.0.0",
+  "description": "Trim videos. Preserve quality. Lossless stream-copy video trimmer.",
+  "author": {
+    "name": "ClipCut",
+    "email": "clipcut@example.com"
+  },
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "main": "electron/main.js",
+  "scripts": {
+    "dev": "concurrently -k -n vite,electron \"vite\" \"wait-on tcp:127.0.0.1:5173 && CLIPCUT_DEV=1 electron . --no-sandbox\"",
+    "build": "vite build",
+    "start": "electron . --no-sandbox",
+    "dist": "vite build && electron-builder --linux",
+    "test": "node --test tests/*.test.js"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.0",
+    "electron": "^41.7.1",
+    "electron-builder": "^26.18.0",
+    "lucide-react": "^0.468.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "vite": "^8.3.8",
+    "wait-on": "^8.0.1"
+  },
+  "build": {
+    "appId": "local.clipcut.app",
+    "productName": "ClipCut",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "package.json"
+    ],
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "AudioVideo",
+      "icon": "assets/icon.png",
+      "synopsis": "Lossless video trimmer"
+    }
+  }
+}
